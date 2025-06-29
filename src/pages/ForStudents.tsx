@@ -4,8 +4,6 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
 import { 
   ArrowRight, 
   Upload, 
@@ -20,10 +18,6 @@ import {
 } from 'lucide-react';
 
 const ForStudents = () => {
-  const [heroRef, heroInView] = useInView({ triggerOnce: true, threshold: 0.1 });
-  const [featuresRef, featuresInView] = useInView({ triggerOnce: true, threshold: 0.1 });
-  const [stepsRef, stepsInView] = useInView({ triggerOnce: true, threshold: 0.1 });
-
   const features = [
     {
       icon: Upload,
@@ -90,39 +84,34 @@ const ForStudents = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen">
       <Navbar />
       
       {/* Hero Section */}
-      <section ref={heroRef} className="relative py-20 lg:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-violet-50 to-purple-100 dark:from-violet-950/20 dark:to-purple-950/20" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="bg-hero-gradient text-white py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={heroInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.8 }}
-            >
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6 font-poppins">
+            <div>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 animate-fade-in">
                 Showcase your
-                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-purple-600">
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-pink-400">
                   coding brilliance
                 </span>
               </h1>
               
-              <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
+              <p className="text-xl md:text-2xl mb-8 opacity-90 leading-relaxed">
                 Transform your projects into a professional portfolio that gets you noticed by top tech recruiters. 
                 Let your code speak for itself.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
                 <Link to="/student/register">
-                  <Button size="lg" className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 px-8 py-4 text-lg font-semibold group">
+                  <Button size="lg" className="bg-white text-violet-600 hover:bg-gray-100 px-8 py-4 text-lg font-semibold group">
                     Build My Portfolio
                     <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </Link>
-                <Button size="lg" variant="outline" className="px-8 py-4 text-lg font-semibold group">
+                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-violet-600 px-8 py-4 text-lg font-semibold group">
                   <Play className="mr-2 h-5 w-5" />
                   Watch Demo
                 </Button>
@@ -130,192 +119,151 @@ const ForStudents = () => {
 
               <div className="grid grid-cols-2 gap-4">
                 {benefits.slice(0, 4).map((benefit, index) => (
-                  <motion.div
-                    key={benefit}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={heroInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
-                    className="flex items-center text-sm text-gray-600 dark:text-gray-300"
-                  >
-                    <CheckCircle className="h-4 w-4 text-green-500 mr-2 flex-shrink-0" />
+                  <div key={benefit} className="flex items-center text-sm text-white/80">
+                    <CheckCircle className="h-4 w-4 text-green-400 mr-2 flex-shrink-0" />
                     {benefit}
-                  </motion.div>
+                  </div>
                 ))}
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={heroInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative"
-            >
-              <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8 border border-gray-200 dark:border-gray-700">
+            <div className="relative">
+              <div className="bg-white rounded-2xl shadow-2xl p-8 border border-gray-200">
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center space-x-3">
-                    <div className="w-8 h-8 bg-gradient-to-br from-violet-600 to-purple-600 rounded-lg flex items-center justify-center">
+                    <div className="w-8 h-8 bg-brand-gradient rounded-lg flex items-center justify-center">
                       <Code className="h-4 w-4 text-white" />
                     </div>
-                    <span className="font-semibold text-gray-900 dark:text-white">Student Dashboard</span>
+                    <span className="font-semibold text-gray-900">Student Dashboard</span>
                   </div>
-                  <Badge className="bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400">
+                  <Badge className="bg-green-100 text-green-800">
                     Live Preview
                   </Badge>
                 </div>
                 
                 <div className="space-y-4">
-                  <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                  <div className="bg-gray-50 rounded-lg p-4">
                     <div className="flex items-center justify-between mb-2">
-                      <h3 className="font-medium text-gray-900 dark:text-white">AI Task Manager</h3>
+                      <h3 className="font-medium text-gray-900">AI Task Manager</h3>
                       <Badge variant="secondary">React</Badge>
                     </div>
-                    <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">
+                    <p className="text-sm text-gray-600 mb-3">
                       Smart task management with AI prioritization...
                     </p>
                     <div className="flex items-center justify-between">
                       <span className="text-xs text-gray-500">234 views</span>
-                      <Button size="sm" className="h-6 text-xs">View Project</Button>
+                      <Button size="sm" className="h-6 text-xs bg-brand-gradient">View Project</Button>
                     </div>
                   </div>
                   
-                  <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                  <div className="bg-gray-50 rounded-lg p-4">
                     <div className="flex items-center justify-between mb-2">
-                      <h3 className="font-medium text-gray-900 dark:text-white">E-commerce Platform</h3>
+                      <h3 className="font-medium text-gray-900">E-commerce Platform</h3>
                       <Badge variant="secondary">Vue.js</Badge>
                     </div>
-                    <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">
+                    <p className="text-sm text-gray-600 mb-3">
                       Full-stack e-commerce with payment integration...
                     </p>
                     <div className="flex items-center justify-between">
                       <span className="text-xs text-gray-500">189 views</span>
-                      <Button size="sm" className="h-6 text-xs">View Project</Button>
+                      <Button size="sm" className="h-6 text-xs bg-brand-gradient">View Project</Button>
                     </div>
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section ref={featuresRef} className="py-20 bg-white dark:bg-gray-900">
+      <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={featuresInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 font-poppins">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               Everything you need to showcase your talent
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Powerful features designed to help students create compelling portfolios that get results
             </p>
-          </motion.div>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
-              <motion.div
-                key={feature.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={featuresInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-              >
-                <Card className="h-full hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
-                  <CardContent className="p-6">
-                    <div className="w-12 h-12 bg-gradient-to-br from-violet-100 to-purple-100 dark:from-violet-900/20 dark:to-purple-900/20 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                      <feature.icon className="h-6 w-6 text-violet-600 dark:text-violet-400" />
-                    </div>
-                    <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white font-poppins">
-                      {feature.title}
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                      {feature.description}
-                    </p>
-                  </CardContent>
-                </Card>
-              </motion.div>
+              <Card key={feature.title} className="h-full hover:shadow-lg transition-all duration-300 hover-scale group">
+                <CardContent className="p-6">
+                  <div className="w-12 h-12 bg-violet-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-violet-200 transition-colors">
+                    <feature.icon className="h-6 w-6 text-violet-600" />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-3 text-gray-900">
+                    {feature.title}
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    {feature.description}
+                  </p>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
       </section>
 
       {/* How It Works */}
-      <section ref={stepsRef} className="py-20 bg-gray-50 dark:bg-gray-800/50">
+      <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={stepsInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 font-poppins">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               Get started in 4 simple steps
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               From signup to getting discovered by recruiters in just a few minutes
             </p>
-          </motion.div>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {steps.map((step, index) => (
-              <motion.div
-                key={step.number}
-                initial={{ opacity: 0, y: 20 }}
-                animate={stepsInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                className="text-center relative"
-              >
+              <div key={step.number} className="text-center relative">
                 {index < steps.length - 1 && (
-                  <div className="hidden lg:block absolute top-8 left-full w-full h-0.5 bg-gradient-to-r from-violet-200 to-purple-200 dark:from-violet-800 dark:to-purple-800 transform -translate-x-1/2" />
+                  <div className="hidden lg:block absolute top-8 left-full w-full h-0.5 bg-gradient-to-r from-violet-200 to-purple-200 transform -translate-x-1/2" />
                 )}
                 
-                <div className="w-16 h-16 bg-gradient-to-br from-violet-600 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 text-white font-bold text-lg relative z-10">
+                <div className="w-16 h-16 bg-brand-gradient rounded-full flex items-center justify-center mx-auto mb-4 text-white font-bold text-lg relative z-10">
                   {step.number}
                 </div>
                 
-                <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white font-poppins">
+                <h3 className="text-xl font-semibold mb-3 text-gray-900">
                   {step.title}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                <p className="text-gray-600 leading-relaxed">
                   {step.description}
                 </p>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-violet-600 to-purple-600 text-white">
+      <section className="bg-brand-gradient text-white py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 font-poppins">
-              Ready to showcase your projects?
-            </h2>
-            <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-              Join thousands of students who have already landed their dream jobs through JobBridge
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/student/register">
-                <Button size="lg" className="bg-white text-violet-600 hover:bg-gray-100 px-8 py-4 text-lg font-semibold">
-                  Create Free Portfolio
-                </Button>
-              </Link>
-              <Link to="/explore">
-                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-violet-600 px-8 py-4 text-lg font-semibold">
-                  View Examples
-                </Button>
-              </Link>
-            </div>
-          </motion.div>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            Ready to showcase your projects?
+          </h2>
+          <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
+            Join thousands of students who have already landed their dream jobs through JobBridge
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link to="/student/register">
+              <Button size="lg" className="bg-white text-violet-600 hover:bg-gray-100 px-8 py-4 text-lg font-semibold">
+                Create Free Portfolio
+              </Button>
+            </Link>
+            <Link to="/explore">
+              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-violet-600 px-8 py-4 text-lg font-semibold">
+                View Examples
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
 
